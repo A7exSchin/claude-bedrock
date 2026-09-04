@@ -5,4 +5,6 @@ disable-model-invocation: true
 
 !`node "${CLAUDE_PLUGIN_ROOT}/scripts/bedrock.js" status "${CLAUDE_PROJECT_DIR}" "${CLAUDE_SESSION_ID}"`
 
-Show the status above to the user as-is. Don't re-fetch or reinterpret it.
+Reproduce the text above verbatim as your entire response — every line, unmodified, in a
+fenced code block. Do not summarize, paraphrase, condense, or add commentary before or
+after it. Do not re-fetch or reinterpret it.
