@@ -1,11 +1,11 @@
-name: Release
+name: Release (pi)
 
 on:
   push:
     branches:
       - main
     paths:
-      - "package.json"
+      - "pi/package.json"
 
 permissions:
   contents: write
@@ -18,17 +18,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get version from package.json
+      - name: Get version from pi/package.json
         id: version
         run: |
-          VERSION=$(jq -r .version package.json)
+          VERSION=$(jq -r .version pi/package.json)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=pi-bedrock-v$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Check if tag exists
         id: check
         run: |
-          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+          if git rev-parse "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"

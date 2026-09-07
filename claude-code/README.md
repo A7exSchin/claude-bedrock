@@ -57,7 +57,7 @@ Same variable as the Pi side — set it once, both tools pick it up.
 ## Local development
 
 ```bash
-claude --plugin-dir ~/GitLib/Github/claude-bedrock/claude-code
+claude --plugin-dir ~/GitLib/Github/bedrock/claude-code
 ```
 
 After editing skills/hooks, run `/reload-plugins` inside the session instead
