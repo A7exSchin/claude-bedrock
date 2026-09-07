@@ -20,6 +20,7 @@ function expandHome(p) {
 
 function resolveConfigPath() {
   const candidates = [
+    process.env.BEDROCK_CONFIG,
     process.env.CLAUDE_BEDROCK_CONFIG,
     process.env.PI_BEDROCK_CONFIG,
     path.join(os.homedir(), '.pi', 'agent', 'pi-bedrock.json'),
@@ -191,7 +192,7 @@ function main() {
 
   if (!config) {
     console.log(
-      'No bedrock config found. Checked CLAUDE_BEDROCK_CONFIG, PI_BEDROCK_CONFIG, ' +
+      'No bedrock config found. Checked BEDROCK_CONFIG, CLAUDE_BEDROCK_CONFIG, PI_BEDROCK_CONFIG, ' +
         '~/.pi/agent/pi-bedrock.json, ~/.claude/bedrock.json.' +
         (error ? `\nLast error while reading a candidate: ${error}` : '')
     );

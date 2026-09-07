@@ -30,7 +30,8 @@ On `session_start` it also warns if any injected file is already loaded via `AGE
 
 ## Config
 
-Config lives at `~/.pi/agent/pi-bedrock.json` (override with env `PI_BEDROCK_CONFIG`).
+Config lives at `~/.pi/agent/pi-bedrock.json` (override with env `BEDROCK_CONFIG`; the
+older `PI_BEDROCK_CONFIG` still works as a fallback).
 
 ```json
 {

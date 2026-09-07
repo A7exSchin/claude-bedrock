@@ -13,7 +13,8 @@
  *   - Re-reads files from disk on every turn (always fresh, no stale rules).
  *   - Warns on startup if context files overlap with already-loaded AGENTS.md.
  *
- * Config: ~/.pi/agent/pi-bedrock.json (override via PI_BEDROCK_CONFIG env).
+ * Config: ~/.pi/agent/pi-bedrock.json (override via BEDROCK_CONFIG env; PI_BEDROCK_CONFIG
+ * still works as a fallback).
  * Commands: /bedrock [status|list|add <text>|clear|reload]
  */
 

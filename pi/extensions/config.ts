@@ -4,7 +4,8 @@ import { HOME, expandHome } from "./paths.js";
 import type { Config, LoadResult, ModeConfig, ProjectConfig } from "./types.js";
 
 const AGENT_DIR = process.env.PI_CODING_AGENT_DIR ?? path.join(HOME, ".pi", "agent");
-export const CONFIG_PATH = process.env.PI_BEDROCK_CONFIG ?? path.join(AGENT_DIR, "pi-bedrock.json");
+export const CONFIG_PATH =
+	process.env.BEDROCK_CONFIG ?? process.env.PI_BEDROCK_CONFIG ?? path.join(AGENT_DIR, "pi-bedrock.json");
 
 /** Subcommand names of /bedrock that a mode name must not shadow. */
 export const RESERVED_SUBCOMMANDS = ["status", "list", "add", "clear", "reload"] as const;

@@ -8,12 +8,28 @@ context that matters. Two implementations, one per tool, sharing a single config
 |---|---|---|
 | Tool | [Pi](https://github.com/earendil-works/pi) | [Claude Code](https://claude.com/product/claude-code) |
 | Mechanism | `before_agent_start` hook, re-injects every turn | `SessionStart` hook, injects on `startup`/`resume`/`clear`/`fork`/`compact` |
-| Install | `pi install git:github.com/A7exSchin/bedrock` (path resolution TBD post-rename — see below) | `/plugin install bedrock@a7exschin-plugins` |
-| Config env var | `PI_BEDROCK_CONFIG` | `CLAUDE_BEDROCK_CONFIG`, falling back to `PI_BEDROCK_CONFIG` |
+| Config env var | `BEDROCK_CONFIG` (`PI_BEDROCK_CONFIG` still works as a fallback) | same `BEDROCK_CONFIG` (`CLAUDE_BEDROCK_CONFIG`/`PI_BEDROCK_CONFIG` still work as fallbacks) |
 
-Both point at the same `pi-bedrock.json` file, so editing one config keeps both tools in
-sync. See each subdirectory's own README for implementation details, and
-[`pi-bedrock.example.json`](pi/pi-bedrock.example.json) for the config schema.
+Both point at the same `pi-bedrock.json` file — set `BEDROCK_CONFIG` once and both tools
+pick it up, no per-tool config needed. See each subdirectory's own README for
+implementation details, and [`pi-bedrock.example.json`](pi/pi-bedrock.example.json) for the
+config schema.
+
+## Installing
+
+**Pi** (path resolution TBD post-rename, see below):
+
+```bash
+pi install git:github.com/A7exSchin/bedrock
+```
+
+**Claude Code**, via the [a7exschin-plugins](https://github.com/A7exSchin/a7exschin-plugins)
+marketplace, which points at `claude-code/` here with a `git-subdir` source:
+
+```
+/plugin marketplace add A7exSchin/a7exschin-plugins
+/plugin install bedrock@a7exschin-plugins
+```
 
 ## Why one repo
 

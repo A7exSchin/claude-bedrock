@@ -35,10 +35,11 @@ This plugin reads the **exact same JSON schema** as `pi-bedrock.json` — same
 `modes` fields. Point it at the same file pi used and both tools stay in
 sync. Config path resolution, in order:
 
-1. `$CLAUDE_BEDROCK_CONFIG`
-2. `$PI_BEDROCK_CONFIG` (if you already export this for Pi, zero extra setup)
-3. `~/.pi/agent/pi-bedrock.json`
-4. `~/.claude/bedrock.json`
+1. `$BEDROCK_CONFIG` — shared with the Pi side, set this one
+2. `$CLAUDE_BEDROCK_CONFIG` (older, Claude Code-only fallback)
+3. `$PI_BEDROCK_CONFIG` (older, Pi-only fallback)
+4. `~/.pi/agent/pi-bedrock.json`
+5. `~/.claude/bedrock.json`
 
 One difference from pi-bedrock: a project's `memory` directory is scanned for
 `.md` files directly inside it (non-recursive), sorted by most-recently
@@ -48,10 +49,10 @@ in `scripts/bedrock.js` if you want a different cutoff.
 ## Setup
 
 ```bash
-export CLAUDE_BEDROCK_CONFIG=~/GitLib/codeberg/dev.a7exschin.knowledge/_config/pi-bedrock.json
+export BEDROCK_CONFIG=~/GitLib/codeberg/dev.a7exschin.knowledge/_config/pi-bedrock.json
 ```
 
-(or reuse `PI_BEDROCK_CONFIG` if it's already set for Pi.)
+Same variable as the Pi side — set it once, both tools pick it up.
 
 ## Local development
 
