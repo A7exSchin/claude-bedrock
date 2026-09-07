@@ -17,7 +17,7 @@ config schema.
 
 ## Installing
 
-**Pi** (path resolution TBD post-rename, see below):
+**Pi**:
 
 ```bash
 pi install git:github.com/A7exSchin/bedrock
@@ -45,14 +45,15 @@ though the actual code — Pi's TypeScript/Vitest extension vs. Claude Code's pl
 
 ## Versioning
 
-Both implementations release under the same version number, continuing Pi's pre-fuse
-version lineage (`pi-bedrock` reached v0.3.0 as a standalone repo; the first release from
-this fused repo is v0.4.0). A shared version doesn't mean every release changes both sides —
-it just means whichever side changes, the number moves for both, so "what's the current
-bedrock version" always has one unambiguous answer. Each side still gets its own tag on the
-same commit — `pi-bedrock-vX.Y.Z` for Pi (matching CI in `.github/workflows/release-pi.yml`,
-which watches `pi/package.json`), `bedrock--vX.Y.Z` for Claude Code (`claude plugin tag`,
-which validates `claude-code/.claude-plugin/plugin.json`'s version).
+One repo, one state, one version: `pi/package.json` and `claude-code/.claude-plugin/plugin.json`
+always carry the same version number, tagged once as `vX.Y.Z` — not two separate tags per
+side. `.github/workflows/release.yml` enforces this: it fails the build if the two files
+disagree, and cuts the single tag + GitHub Release when either changes.
+
+Continues Pi's pre-fuse version lineage (`pi-bedrock` reached v0.3.0 as a standalone repo;
+v0.4.0 is the first release from the fused repo). The five `pi-bedrock-v0.1.0`–`v0.3.0` tags
+that predate the fuse are kept as-is — legacy markers from when Pi was the only
+implementation, not part of the ongoing scheme.
 
 ## License
 

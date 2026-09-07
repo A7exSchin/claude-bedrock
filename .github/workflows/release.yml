@@ -1,4 +1,4 @@
-name: Release (pi)
+name: Release
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "pi/package.json"
+      - "claude-code/.claude-plugin/plugin.json"
 
 permissions:
   contents: write
@@ -18,12 +19,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get version from pi/package.json
+      - name: Get version (both sides move together - see README's Versioning section)
         id: version
         run: |
-          VERSION=$(jq -r .version pi/package.json)
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "tag=pi-bedrock-v$VERSION" >> "$GITHUB_OUTPUT"
+          PI_VERSION=$(jq -r .version pi/package.json)
+          CC_VERSION=$(jq -r .version claude-code/.claude-plugin/plugin.json)
+          if [ "$PI_VERSION" != "$CC_VERSION" ]; then
+            echo "::error::pi/package.json ($PI_VERSION) and claude-code/.claude-plugin/plugin.json ($CC_VERSION) versions disagree"
+            exit 1
+          fi
+          echo "version=$PI_VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$PI_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Check if tag exists
         id: check
