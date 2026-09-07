@@ -7,6 +7,10 @@ on:
     paths:
       - "pi/package.json"
       - "claude-code/.claude-plugin/plugin.json"
+  # Lets a release be (re-)created for the current version without needing a new
+  # commit - e.g. to backfill one after a tag got pushed manually, bypassing this
+  # pipeline, and the release never got created.
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -31,10 +35,15 @@ jobs:
           echo "version=$PI_VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$PI_VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Check if tag exists
+      # Checks whether a *release* exists, not just a tag - a tag can exist without
+      # a release (e.g. pushed by hand), and that's exactly the case this should
+      # still create a release for.
+      - name: Check if a release already exists for this version
         id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if git rev-parse "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+          if gh release view "${{ steps.version.outputs.tag }}" --repo "${{ github.repository }}" >/dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
