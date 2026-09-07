@@ -1,7 +1,7 @@
 {
   "name": "bedrock",
   "description": "Compaction-proof vault context: injects configured markdown files from a knowledge vault at session start and after every compaction. Claude Code port of pi-bedrock, config-compatible with pi-bedrock.json.",
-  "version": "0.1.1",
+  "version": "0.4.0",
   "author": {
     "name": "Alexander Schindler"
   }
