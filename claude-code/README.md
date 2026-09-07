@@ -56,7 +56,7 @@ export CLAUDE_BEDROCK_CONFIG=~/GitLib/codeberg/dev.a7exschin.knowledge/_config/p
 ## Local development
 
 ```bash
-claude --plugin-dir ~/GitLib/Github/claude-bedrock
+claude --plugin-dir ~/GitLib/Github/claude-bedrock/claude-code
 ```
 
 After editing skills/hooks, run `/reload-plugins` inside the session instead
@@ -81,8 +81,13 @@ node scripts/bedrock.js add <session-id> "some note"
 
 ## Installing for real use
 
-Once it's working, either keep using `--plugin-dir` (add it to a shell alias
-for `claude`), or turn this repo into a minimal marketplace so `/plugin
-install` works normally — add `.claude-plugin/marketplace.json` at the repo
-root listing this plugin, then `/plugin marketplace add <path-or-url>` and
-`/plugin install bedrock@<marketplace-name>`.
+Installed via the [a7exschin-plugins](https://github.com/A7exSchin/a7exschin-plugins)
+marketplace, which points at this subdirectory with a `git-subdir` source:
+
+```
+/plugin marketplace add A7exSchin/a7exschin-plugins
+/plugin install bedrock@a7exschin-plugins
+```
+
+See the repo root [README](../README.md) for why the Pi and Claude Code
+implementations share one repo.
