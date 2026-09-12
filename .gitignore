@@ -1,0 +1,4 @@
+# Root package.json is pi's package manifest; its install artifacts stay untracked.
+# pi/ keeps its own lockfile and node_modules for tests (nested, npm-inert).
+node_modules/
+package-lock.json

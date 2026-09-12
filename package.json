@@ -1,0 +1,22 @@
+{
+  "name": "pi-bedrock",
+  "version": "0.4.0",
+  "description": "Compaction-proof context injection for pi — vault core files, project-scoped files, ephemeral notes in the system prompt.",
+  "keywords": [
+    "pi-package"
+  ],
+  "license": "MIT",
+  "author": "Alexander Schindler",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/A7exSchin/bedrock.git"
+  },
+  "dependencies": {
+    "js-tiktoken": "^1.0.21"
+  },
+  "pi": {
+    "extensions": [
+      "./pi/extensions"
+    ]
+  }
+}
